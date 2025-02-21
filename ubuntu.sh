@@ -93,14 +93,15 @@ else
    \$command -c "\$com"
 fi
 EOM
-     echo "Fixing shebang of $linux"
+     echo ""
+     echo "Fixing shebang of $linux."
      termux-fix-shebang $bin
-     echo "Making $linux executable"
+     echo "Making $linux executable."
      chmod +x $bin
-     #echo "Fixing permissions for $linux"
+     echo "Fixing permissions $linux."
      #chmod -R 755 $folder
-     echo "Removing image for some space"
-     rm $tarball
+     echo "Removing rootfs of $linux."
+     #rm $tarball
      echo ""
      echo "Updating Package,.."
      echo ""
