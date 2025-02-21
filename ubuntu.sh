@@ -1,17 +1,17 @@
 #!/data/data/com.termux/files/usr/bin/bash
 pkg install root-repo x11-repo
-pkg install proot xz-utils neofetch pulseaudio -y
+pkg install proot neofetch pulseaudio -y
 #termux-setup-storage
 echo ""
-alpine=edge
-build=20240923
-neofetch --ascii_distro Alpine -L
-folder=alpine-fs
+ubuntu=latest
+build=2025
+neofetch --ascii_distro Ubuntu -L
+folder=ubuntu-fs
 if [ -d "$folder" ]; then
          first=1
-         echo "Skipping Downloading."
+         echo "Skip Downloading."
 fi
-tarball="alpine-rootfs.tar.gz"
+tarball="ubuntu-rootfs.tar.gz"
 if [ "$first" != 1 ];then
          if [ ! -f $tarball ]; then
                echo "Download Rootfs, this may take a while base on your internet speed."
@@ -38,8 +38,8 @@ if [ "$first" != 1 ];then
     echo "localhost" > $folder/etc/hostname
     echo "127.0.0.1 localhost" > $folder/etc/hosts
     echo "nameserver 8.8.8.8" > $folder/etc/resolv.conf
-bin=.alpine
-linux=alpine
+bin=.ubuntu
+linux=ubuntu
 echo "Writing launch script"
 cat > $bin <<- EOM
 #!/data/data/com.termux/files/usr/bin/bash
@@ -95,43 +95,27 @@ else
    \$command -c "\$com"
 fi
 EOM
-     echo ""
      echo "Fixing shebang of $linux"
      termux-fix-shebang $bin
      echo "Making $linux executable"
      chmod +x $bin
-     echo "Fixing permissions for $linux"
+     #echo "Fixing permissions for $linux"
      #chmod -R 755 $folder
      echo "Removing image for some space"
      rm $tarball
-echo ""
-echo "#Alpine Repositories
-https://dl-cdn.alpinelinux.org/alpine/edge/main
-https://dl-cdn.alpinelinux.org/alpine/edge/testing
-https://dl-cdn.alpinelinux.org/alpine/edge/community" > $folder/etc/apk/repositories
-echo "" > $folder/root/.hushlogin
-echo "export PULSE_SERVER=127.0.0.1" >> $folder/root/.bashrc
-echo 'bash .alpine' > $PREFIX/bin/$linux
-chmod +x $PREFIX/bin/$linux
-     ./$bin apk add --no-cache bash
-     sed -i 's/ash/bash/g' $folder/etc/passwd
-     sed -i 's/bin\/sh/bin\/bash/g' $bin
-     clear
      echo ""
      echo "Updating Package,.."
      echo ""
 echo "#!/bin/bash
-apk update ; apk upgrade
-apk add dialog nano sudo ncurses tzdata
-ln -s /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
+apt update ; apt upgrade ; apt dialog nano sudo -y
 rm -rf ~/.bash_profile
 exit" > $folder/root/.bash_profile
 bash $bin
      clear
      echo ""
-     echo "You can login to Linux with 'alpine' script next time"
+     echo "You can login to Linux with '$linux' script next time"
      echo ""
-     #rm alpinedev.sh
+     #rm ubuntu.sh
 #
 ## Script edited by 'WaHaSa', Script revision-5.
 #
