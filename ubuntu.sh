@@ -3,8 +3,8 @@ pkg install root-repo x11-repo
 pkg install proot neofetch pulseaudio -y
 #termux-setup-storage
 echo ""
-ubuntu=latest
-build=2025
+ubuntu=plucky
+build=latest
 neofetch --ascii_distro Ubuntu -L
 folder=ubuntu-fs
 if [ -d "$folder" ]; then
@@ -19,15 +19,15 @@ if [ "$first" != 1 ];then
                aarch64)
                        archurl="aarch64" ;;
                arm*)
-                       archurl="armv7" ;;
-               i386)
-		       archurl="x86" ;;
+                       archurl="arm64" ;;
+	       #i386)
+	       #       archurl="x86" ;;
                x86_64)
-                       archurl="x86_64" ;;
+                       archurl="amd64" ;;
                *)
                        echo "Unknown Architecture."; exit 1 ;;
                esac
-	       wget -q --show-progress "https://dl-cdn.alpinelinux.org/alpine/${alpine}/releases/${archurl}/alpine-minirootfs-${build}-${archurl}.tar.gz" -O $tarball
+	       wget -q "https://partner-images.canonical.com/oci/${ubuntu}/current/ubuntu-plucky-oci-${archurl}-root.tar.gz" -O $tarball
 	 fi
          mkdir -p $folder
 	 mkdir -p $folder/binds
@@ -105,8 +105,12 @@ EOM
      echo ""
      echo "Updating Package,.."
      echo ""
+echo "" > $folder/root/.hushlogin
+echo "export PULSE_SERVER=127.0.0.1" >> $folder/root/.bashrc
+echo 'bash .ubuntu' > $PREFIX/bin/$linux
+chmod +x $PREFIX/bin/$linux
 echo "#!/bin/bash
-apt update ; apt upgrade ; apt dialog nano sudo -y
+apt update ; apt upgrade -y ; apt dialog nano sudo -y
 rm -rf ~/.bash_profile
 exit" > $folder/root/.bash_profile
 bash $bin
