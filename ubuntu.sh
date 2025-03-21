@@ -1,5 +1,7 @@
 #!/data/data/com.termux/files/usr/bin/bash
-# Ubuntu Linux
+# <=> https://github.com/wahasa
+
+# Ubuntu Releases
 # <=> https://ubuntu.com
 
 # Ubuntu ESM ( Extended Security Maintenance )
@@ -12,7 +14,7 @@
 # [+] jammy  22.04 lts ( Jammy Jellyfish )
 # [+] noble  24.04 lts ( Noble Numbat )
 
-# Ubuntu Release
+# Ubuntu Lastest
 # [+] oracular 24.10 ( Oracular Oriole )
 # [+] plucky   25.04 ( Plucky Puffin )
 
@@ -37,28 +39,33 @@ wht="\033[0;37m"       # White
 rst="\033[0m"          # Reset
 
 clear
-printf "${blu} • Lists ubuntu release\n"
+printf "${blu} • Welcome To Ubuntu Termux For Android\n"
 printf "\n"
-printf "${blu}<=> Code Name     Version     Recommended\n"
-printf "${cyn}[+] ${ylw}plucky        ${wht}25.04       ${grn}yes\n"
-printf "${cyn}[+] ${ylw}oracular      ${wht}24.10       ${grn}yes\n"
-printf "${cyn}[+] ${ylw}noble         ${wht}24.04       ${grn}yes\n"
-printf "${cyn}[+] ${ylw}jammy         ${wht}22.04       ${grn}yes\n"
-printf "${cyn}[+] ${ylw}focal         ${wht}20.04       ${grn}yes\n"
-printf "${cyn}[+] ${ylw}bionic        ${wht}18.04       ${grn}yes\n"
-printf "${cyn}[+] ${ylw}xenial        ${wht}16.04       ${red}no\n"
-printf "${cyn}[+] ${ylw}trusty        ${wht}14.04       ${red}no\n"
+printf "${blu}List Code Name     Version     Recommended\n"
+printf "${grn}[+]  ${ylw}plucky         ${wht}25.04          ${grn}yes\n"
+printf "${grn}[+]  ${ylw}oracular       ${wht}24.10          ${grn}yes\n"
+printf "${grn}[+]  ${ylw}noble          ${wht}24.04          ${grn}yes\n"
+printf "${grn}[+]  ${ylw}jammy          ${wht}22.04          ${grn}yes\n"
+printf "${grn}[+]  ${ylw}focal          ${wht}20.04          ${grn}yes\n"
+printf "${grn}[+]  ${ylw}bionic         ${wht}18.04          ${grn}yes\n"
+printf "${red}[+]  ${red}xenial         ${red}16.04          ${red}no\n"
+printf "${red}[+]  ${red}trusty         ${red}14.04          ${red}no\n"
 printf "${blu}\n"
+printf "${cyn}Select your ubuntu < ${ylw}code name${cyn} > :${ylw}"
+read -p " " ubuntu
 
-read -p "Select your ubuntu < code name > : " ubuntu
-
-printf "${rst}\n"
-pkg install root-repo x11-repo
-pkg install proot neofetch pulseaudio -y
-#termux-setup-storage
+clear
+bin=.ubuntu
+linux=ubuntu
+     printf "${rst}\n"
+     printf "${grn}Installing $linux $ubuntu,..\n"
+     printf "${rst}\n"
+     pkg install root-repo x11-repo
+     pkg install proot neofetch pulseaudio -y
+     #termux-setup-storage
 echo ""
-neofetch --ascii_distro Ubuntu -L
 folder=ubuntu-fs
+neofetch --ascii_distro $linux -L
 if [ -d "$folder" ]; then
          first=1
          printf "${red}Skipping Downloading.${rst}\n"
@@ -73,7 +80,7 @@ if [ "$first" != 1 ];then
                        archurl="arm64" ;;
                arm*)
                        archurl="armhf" ;;
-	       #x86)
+	       #i386)
 	       #       archurl="i386" ;;
                x86_64)
                        archurl="amd64" ;;
@@ -81,6 +88,7 @@ if [ "$first" != 1 ];then
                        echo "Unknown Architecture."; exit 1 ;;
                esac
 	       wget "https://partner-images.canonical.com/oci/${ubuntu}/current/ubuntu-${ubuntu}-oci-${archurl}-root.tar.gz" -O $tarball
+               #wget "https://partner-images.canonical.com/core/${ubuntu}/current/ubuntu-${ubuntu}-core-cloudimg-${archurl}-root.tar.gz" -O $tarball
 	 fi
          mkdir -p $folder
 	 mkdir -p $folder/binds
@@ -90,10 +98,11 @@ if [ "$first" != 1 ];then
     echo "localhost" > $folder/etc/hostname
     echo "127.0.0.1 localhost" > $folder/etc/hosts
     echo "nameserver 8.8.8.8" > $folder/etc/resolv.conf
-bin=.ubuntu
-linux=ubuntu
-printf "\n"
-printf "${ppl}Writing launch script.${rst}\n"
+    mkdir -p $folder/home/$linux
+    printf "\n"
+    printf "${ppl}Writing launch script.${rst}\n"
+    printf "\n"
+
 cat > $bin <<- EOM
 #!/data/data/com.termux/files/usr/bin/bash
 cd \$(dirname \$0)
@@ -102,8 +111,6 @@ pulseaudio --start --load="module-native-protocol-tcp auth-ip-acl=127.0.0.1 auth
 ## Unset LD_PRELOAD in case termux-exec is installed
 unset LD_PRELOAD
 command="proot"
-## Uncomment following line if you are having FATAL: kernel too old message.
-#command+=" -k 4.14.81"
 command+=" --link2symlink"
 command+=" --kill-on-exit"
 command+=" -0"
@@ -115,64 +122,80 @@ if [ -n "\$(ls -A $folder/binds)" ]; then
 fi
 command+=" -b /dev"
 command+=" -b /dev/urandom:/dev/random"
+command+=" -b /dev/null:/proc/sys/kernel/cap_last_cap"
 command+=" -b /proc"
 command+=" -b /proc/self/fd:/dev/fd"
 command+=" -b /proc/self/fd/0:/dev/stdin"
 command+=" -b /proc/self/fd/1:/dev/stdout"
 command+=" -b /proc/self/fd/2:/dev/stderr"
 command+=" -b /sys"
-command+=" -b $folder/root:/dev/shm"
+command+=" -b /data/data/com.termux"
+command+=" -b $folder/tmp:/dev/shm"
 ## Uncomment the following line to have access to the home directory of termux
-#command+=" -b /data/data/com.termux/files/home:/root"
+#command+=" -b /data/data/com.termux/files/home:/home/$linux"
 ## Uncomment the following line to mount /sdcard directly to /
-command+=" -b /storage"
 command+=" -b /sdcard"
 command+=" -b /mnt"
-command+=" -w /root"
+command+=" -w /home/$linux"
 command+=" /usr/bin/env -i"
-command+=" HOME=/root"
-command+=" PATH=/usr/local/sbin:/usr/local/bin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/games:/usr/local/games"
+command+=" HOME=/home/$linux"
+command+=" PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 command+=" TERM=\$TERM"
 command+=" LC_ALL=C"
 command+=" LANG=en_US.UTF-8"
 command+=" LANGUAGE=en_US"
 command+=" /bin/bash --login"
-command+=" \$@"
+com=" \$@"
 if [ -z "\$1" ];then
    exec \$command
 else
    \$command -c "\$com"
 fi
 EOM
-     printf "\n"
      printf "${ylw}Fixing shebang of $linux.\n"
      termux-fix-shebang $bin
-     printf "$ylw}Making $linux executable.\n"
+     printf "${ylw}Making executable $linux.\n"
      chmod +x $bin
      printf "${ylw}Fixing permissions $linux.\n"
      #chmod -R 755 $folder
      printf "${ylw}Removing rootfs of $linux.\n"
-     #rm $tarball
+     rm $tarball
+     #clear
      printf "\n"
-     printf "${ppl}Updating Package,..${rst}\n"
+     printf "${red}Updating Package,..${rst}\n"
      printf "\n"
-echo "" > $folder/root/.hushlogin
-#echo "TZ='Asia/Jakarta'; export TZ" >> $folder/root/.profile
-echo "export PULSE_SERVER=127.0.0.1" >> $folder/root/.bashrc
-echo 'bash .ubuntu' > $PREFIX/bin/$linux
+
+cp $folder/etc/skel/.bashrc $folder/home/$linux/
+#echo "TZ='Asia/Jakarta'; export TZ" >> $folder/home/$linux/.profile
+echo "export PULSE_SERVER=127.0.0.1 ; export LANG=en_US.UTF-8" >> $folder/home/$linux/.bashrc
+#sed -i 's/32/31/g' $folder/home/$linux/.bashrc
+echo "" > $folder/home/$linux/.hushlogin
+
+cat > $PREFIX/bin/$linux <<- EOF
+bash .$linux
+EOF
+
 chmod +x $PREFIX/bin/$linux
-echo "#!/bin/bash
+cat > $folder/home/$linux/.bash_profile <<- EOF
 apt update ; apt upgrade -y
 ln -s /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
 apt install dialog nano sudo tzdata -y
+useradd -m -s /bin/bash $linux
+echo "$linux:$linux" | chpasswd
+echo "$linux  ALL=(ALL:ALL) ALL" > /etc/sudoers.d/$linux
 rm -rf ~/.bash_profile
-exit" > $folder/root/.bash_profile
+exit
+EOF
+
 bash $bin
-#    clear
+cat > $PREFIX/bin/$linux <<- EOF
+bash .$linux su $linux
+EOF
+     clear
      printf "\n"
      printf "${cyn}You can login to Linux with '${grn}$linux${cyn}' script next time.${rst}\n"
      printf "\n"
      #rm ubuntu.sh
 #
-## Script edited by 'WaHaSa', Script revision-5.
+## Script edited by 'WaHaSa', Script revision-6.
 #
