@@ -55,6 +55,8 @@ printf "${cyn}Select your ubuntu < ${ylw}code name${cyn} > :${ylw}"
 read -p " " ubuntu
 
 clear
+#ubuntu=plucky
+#build=2025
 bin=.ubuntu
 linux=ubuntu
      printf "${rst}\n"
