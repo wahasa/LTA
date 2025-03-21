@@ -61,7 +61,7 @@ if [ -d "$folder" ]; then
          first=1
          printf "${red}Skipping Downloading.${rst}\n"
 fi
-tarball="debian-rootfs.tar"
+tarball="debian-rootfs.tar.gz"
 if [ "$first" != 1 ];then
          if [ ! -f $tarball ]; then
          printf "${grn}Downloading rootfs, please wait,..${rst}\n"
