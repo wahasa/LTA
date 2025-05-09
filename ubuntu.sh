@@ -9,14 +9,18 @@
 # [+] xenial 16.04 lts ( Xenial Xerus )
 # [+] bionic 18.04 lts ( Bionic Beaver )
 
-# Ubuntu LTS ( Long term support )
+# Ubuntu LTS ( Long Term Support )
 # [+] focal  20.04 lts ( Focal Fossa )
 # [+] jammy  22.04 lts ( Jammy Jellyfish )
 # [+] noble  24.04 lts ( Noble Numbat )
 
-# Ubuntu Lastest
-# [+] oracular 24.10 ( Oracular Oriole )
-# [+] plucky   25.04 ( Plucky Puffin )
+# Ubuntu Interim
+# [+] oracular  24.10 ( Oracular Oriole )
+# [+] plucky    25.04 ( Plucky Puffin )
+# [+] questing  25.10 ( Questing Quokka )
+
+# Ubuntu Next
+# [+] devel  ( Development )
 
 # Ubuntu Repositories
 # <=> http://ports.ubuntu.com/ubuntu-ports/dists
@@ -42,6 +46,8 @@ clear
 printf "${blu} • Welcome To Ubuntu Termux For Android\n"
 printf "\n"
 printf "${blu}List Code Name     Version     Recommended\n"
+#printf "${grn}[+]  ${ylw}devel          ${wht}next           ${grn}no\n"
+#printf "${grn}[+]  ${ylw}questing       ${wht}25.10          ${grn}yes\n"
 printf "${grn}[+]  ${ylw}plucky         ${wht}25.04          ${grn}yes\n"
 printf "${grn}[+]  ${ylw}oracular       ${wht}24.10          ${grn}yes\n"
 printf "${grn}[+]  ${ylw}noble          ${wht}24.04          ${grn}yes\n"
@@ -108,9 +114,9 @@ if [ "$first" != 1 ];then
 cat > $bin <<- EOM
 #!/data/data/com.termux/files/usr/bin/bash
 cd \$(dirname \$0)
-## Start pulseaudio
+## Audio output script in pulseaudio termux.
 pulseaudio --start --load="module-native-protocol-tcp auth-ip-acl=127.0.0.1 auth-anonymous=1" --exit-idle-time=-1
-## Unset LD_PRELOAD in case termux-exec is installed
+## Unset LD_PRELOAD in case termux-exec is installed.
 unset LD_PRELOAD
 command="proot"
 command+=" --link2symlink"
@@ -133,9 +139,9 @@ command+=" -b /proc/self/fd/2:/dev/stderr"
 command+=" -b /sys"
 command+=" -b /data/data/com.termux"
 command+=" -b $folder/tmp:/dev/shm"
-## Uncomment the following line to have access to the home directory of termux
+## Uncomment the following line to have access to the home directory of termux.
 #command+=" -b /data/data/com.termux/files/home:/home/$linux"
-## Uncomment the following line to mount /sdcard directly to /
+## Uncomment the following line to mount /sdcard directly.
 command+=" -b /sdcard"
 command+=" -b /mnt"
 command+=" -w /home/$linux"
@@ -160,7 +166,7 @@ EOM
      chmod +x $bin
      printf "${ylw}Fixing permissions $linux.\n"
      #chmod -R 755 $folder
-     printf "${ylw}Removing rootfs of $linux.\n"
+     printf "${ylw}Removing rootfs in termux.\n"
      rm $tarball
      #clear
      printf "\n"
