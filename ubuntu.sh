@@ -149,9 +149,9 @@ command+=" /usr/bin/env -i"
 command+=" HOME=/home/$linux"
 command+=" PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 command+=" TERM=\$TERM"
-command+=" LC_ALL=C"
-command+=" LANG=en_US.UTF-8"
-command+=" LANGUAGE=en_US"
+#command+=" LC_ALL=C"
+#command+=" LANG=en_US.UTF-8"
+#command+=" LANGUAGE=en_US"
 command+=" /bin/bash --login"
 com=" \$@"
 if [ -z "\$1" ];then
@@ -175,7 +175,7 @@ EOM
 
 cp $folder/etc/skel/.bashrc $folder/home/$linux/
 #echo "TZ='Asia/Jakarta'; export TZ" >> $folder/home/$linux/.profile
-echo "export PULSE_SERVER=127.0.0.1 ; export LANG=en_US.UTF-8" >> $folder/home/$linux/.bashrc
+echo "export PULSE_SERVER=127.0.0.1" >> $folder/home/$linux/.bashrc
 #sed -i 's/32/31/g' $folder/home/$linux/.bashrc
 echo "" > $folder/home/$linux/.hushlogin
 
