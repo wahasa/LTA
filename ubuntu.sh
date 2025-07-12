@@ -94,7 +94,6 @@ if [ "$first" != 1 ];then
                        echo "Unknown Architecture."; exit 1 ;;
                esac
 	       wget "https://partner-images.canonical.com/oci/${ubuntu}/current/ubuntu-${ubuntu}-oci-${archurl}-root.tar.gz" -O $tarball
-               #wget "https://partner-images.canonical.com/core/${ubuntu}/current/ubuntu-${ubuntu}-core-cloudimg-${archurl}-root.tar.gz" -O $tarball
 	 fi
          mkdir -p $folder
 	 mkdir -p $folder/binds
