@@ -43,7 +43,7 @@ printf "${blu} • Welcome To Debian Termux For Android\n"
 printf "\n"
 printf "${blu}List Code Name     Version     Recommended\n"
 printf "${grn}[+]  ${ylw}trixie         ${wht}13.00          ${grn}yes\n"
-printf "${grn}[+]  ${ylw}bookworm       ${wht}12.09          ${grn}yes\n"
+printf "${grn}[+]  ${ylw}bookworm       ${wht}12.11          ${grn}yes\n"
 printf "${grn}[+]  ${ylw}bullseye       ${wht}11.11          ${grn}yes\n"
 printf "${red}[+]  ${red}buster         ${red}10.13          ${red}no\n"
 printf "${blu}\n"
@@ -51,8 +51,6 @@ printf "${cyn}Select your debian < ${ylw}code name${cyn} > :${ylw}"
 read -p " " debian
 
 clear
-#debian=trixie
-#build=2025
 bin=.debian
 linux=debian
      printf "${rst}\n"
