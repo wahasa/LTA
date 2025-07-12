@@ -3,6 +3,7 @@
 
 # Ubuntu Releases
 # <=> https://ubuntu.com
+# <=> https://ubuntu.com/about/release-cycle
 
 # Ubuntu ESM ( Extended Security Maintenance )
 # [+] trusty 14.04 lts ( Trusty Tahr )     - ( Released Apr 2014 / End of Legacy Support Apr 2026 )
