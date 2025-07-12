@@ -150,7 +150,7 @@ EOM
      printf "\n"
 
 cp $folder/etc/skel/.bashrc $folder/home/$linux/
-#echo "TZ='Asia/Jakarta'; export TZ" >> $folder/home/$linux/.profile
+echo "TZ='Asia/Jakarta'; export TZ" >> $folder/home/$linux/.profile
 echo "export PULSE_SERVER=127.0.0.1" >> $folder/home/$linux/.bashrc
 #sed -i 's/32/31/g' $folder/home/$linux/.bashrc
 echo "" > $folder/home/$linux/.hushlogin
@@ -162,7 +162,7 @@ EOF
 chmod +x $PREFIX/bin/$linux
 cat > $folder/home/$linux/.bash_profile <<- EOF
 apt update ; apt upgrade -y
-ln -s /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
+#ln -s /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
 apt install dialog nano sudo tzdata -y
 useradd -m -s /bin/bash $linux
 echo "$linux:$linux" | chpasswd
