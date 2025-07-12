@@ -90,8 +90,8 @@ if [ "$first" != 1 ];then
                        archurl="armhf" ;;
 	       #i386)
 	       #       archurl="i386" ;;
-               x86_64)
-                       archurl="amd64" ;;
+               #x86_64)
+               #       archurl="amd64" ;;
                *)
                        echo "Unknown Architecture."; exit 1 ;;
                esac
@@ -129,20 +129,12 @@ if [ -n "\$(ls -A $folder/binds)" ]; then
    done
 fi
 command+=" -b /dev"
-command+=" -b /dev/urandom:/dev/random"
-command+=" -b /dev/null:/proc/sys/kernel/cap_last_cap"
 command+=" -b /proc"
-command+=" -b /proc/self/fd:/dev/fd"
-command+=" -b /proc/self/fd/0:/dev/stdin"
-command+=" -b /proc/self/fd/1:/dev/stdout"
-command+=" -b /proc/self/fd/2:/dev/stderr"
-command+=" -b /sys"
 command+=" -b $folder/home/$linux:/dev/shm"
 ## Uncomment the following line to have access to the home directory of termux.
 #command+=" -b /data/data/com.termux/files/home:/home/$linux"
 ## Uncomment the following line to mount /sdcard directly.
 command+=" -b /sdcard"
-command+=" -b /mnt"
 command+=" -w /home/$linux"
 command+=" /usr/bin/env -i"
 command+=" HOME=/home/$linux"
