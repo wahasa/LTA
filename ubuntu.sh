@@ -14,12 +14,12 @@
 # [+] jammy  22.04 lts ( Jammy Jellyfish ) - ( Released Apr 2022 / End of Legacy Support Apr 2034 )
 # [+] noble  24.04 lts ( Noble Numbat )    - ( Released Apr 2024 / End of Legacy Support Apr 2036 )
 
-# Ubuntu Interim
+# Ubuntu Lastest
 # [+] oracular  24.10 ( Oracular Oriole )  - ( Released Oct 2024 / End of Standard Support Jul 2025 )
 # [+] plucky    25.04 ( Plucky Puffin )    - ( Released Apr 2025 / End of Standard Support jan 2026 )
-# [+] questing  25.10 ( Questing Quokka )  - ( Next Release )
 
 # Ubuntu Next
+# [+] questing  25.10 ( Questing Quokka )  - ( Next Release )
 # [+] devel  ( Development )
 
 # Ubuntu Repositories
