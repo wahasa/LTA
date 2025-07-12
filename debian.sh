@@ -23,8 +23,8 @@
 # <=> http://ftp.debian.org/debian/dists
 
 # Debian Rootfs
-# <=> https://docker.debian.net
 # <=> https://github.com/debuerreotype/docker-debian-artifacts
+# <=> https://docker.debian.net
 # <=> https://hub.docker.com/_/debian
 
 # Regular Colors
