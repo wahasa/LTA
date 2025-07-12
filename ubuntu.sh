@@ -5,14 +5,14 @@
 # <=> https://ubuntu.com
 
 # Ubuntu ESM ( Extended Security Maintenance )
-# [+] trusty 14.04 lts ( Trusty Tahr )
-# [+] xenial 16.04 lts ( Xenial Xerus )
-# [+] bionic 18.04 lts ( Bionic Beaver )
+# [+] trusty 14.04 lts ( Trusty Tahr )     - ( Released Apr 2014 / End of Legacy Support 2026 )
+# [+] xenial 16.04 lts ( Xenial Xerus )    - ( Released Apr 2016 / End of Legacy Support 2028 )
+# [+] bionic 18.04 lts ( Bionic Beaver )   - ( Released Apr 2018 / End of Legacy Support 2030 )
 
 # Ubuntu LTS ( Long Term Support )
-# [+] focal  20.04 lts ( Focal Fossa )
-# [+] jammy  22.04 lts ( Jammy Jellyfish )
-# [+] noble  24.04 lts ( Noble Numbat )
+# [+] focal  20.04 lts ( Focal Fossa )     - ( Released Apr 2020 / End of Legacy Support 2032 )
+# [+] jammy  22.04 lts ( Jammy Jellyfish ) - ( Released Apr 2022 / End of Legacy Support 2034 )
+# [+] noble  24.04 lts ( Noble Numbat )    - ( Released Apr 2024 / End of Legacy Support 2036 )
 
 # Ubuntu Interim
 # [+] oracular  24.10 ( Oracular Oriole )
