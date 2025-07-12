@@ -76,10 +76,10 @@ if [ "$first" != 1 ];then
                        archurl="arm64v8" ;;
                arm*)
                        archurl="arm32v7" ;;
-               i386)
-	               archurl="i386" ;;
-               x86_64)
-                       archurl="amd64" ;;
+               #i386)
+	       #       archurl="i386" ;;
+               #x86_64)
+               #       archurl="amd64" ;;
                *)
                        echo "Unknown Architecture."; exit 1 ;;
                esac
@@ -142,7 +142,7 @@ EOM
      chmod +x $bin
      printf "${ylw}Fixing permissions $linux.\n"
      #chmod -R 755 $folder
-     printf "${ylw}Removing rootfs of $linux.\n"
+     printf "${ylw}Removing rootfs in termux.\n"
      rm $tarball
      #clear
      printf "\n"
@@ -151,7 +151,7 @@ EOM
 
 cp $folder/etc/skel/.bashrc $folder/home/$linux/
 #echo "TZ='Asia/Jakarta'; export TZ" >> $folder/home/$linux/.profile
-#echo "export PULSE_SERVER=127.0.0.1 ; export LANG=en_US.UTF-8" >> $folder/home/$linux/.bashrc
+echo "export PULSE_SERVER=127.0.0.1" >> $folder/home/$linux/.bashrc
 #sed -i 's/32/31/g' $folder/home/$linux/.bashrc
 echo "" > $folder/home/$linux/.hushlogin
 
@@ -162,7 +162,7 @@ EOF
 chmod +x $PREFIX/bin/$linux
 cat > $folder/home/$linux/.bash_profile <<- EOF
 apt update ; apt upgrade -y
-#ln -s /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
+ln -s /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
 apt install dialog nano sudo tzdata -y
 useradd -m -s /bin/bash $linux
 echo "$linux:$linux" | chpasswd
