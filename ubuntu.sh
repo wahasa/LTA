@@ -15,8 +15,8 @@
 # [+] noble  24.04 lts ( Noble Numbat )    - ( Released Apr 2024 / End of Legacy Support Apr 2036 )
 
 # Ubuntu Interim
-# [+] oracular  24.10 ( Oracular Oriole )  - ( Released Oct 2024 / End of Standard Support Jul 2025)
-# [+] plucky    25.04 ( Plucky Puffin )    - ( Released Apr 2025 / End of Standard Support jan 2026)
+# [+] oracular  24.10 ( Oracular Oriole )  - ( Released Oct 2024 / End of Standard Support Jul 2025 )
+# [+] plucky    25.04 ( Plucky Puffin )    - ( Released Apr 2025 / End of Standard Support jan 2026 )
 # [+] questing  25.10 ( Questing Quokka )  - ( Next Release )
 
 # Ubuntu Next
