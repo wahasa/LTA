@@ -54,7 +54,7 @@ clear
 bin=.debian
 linux=debian
      printf "${rst}\n"
-     printf "${grn}Installing $linux $ubuntu,..\n"
+     printf "${grn}Installing $linux $debian,..\n"
      printf "${rst}\n"
      pkg install root-repo x11-repo
      pkg install proot neofetch pulseaudio -y
