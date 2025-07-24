@@ -123,6 +123,7 @@ command+=" -b /proc/self/fd:/dev/fd"
 command+=" -b /proc/self/fd/0:/dev/stdin"
 command+=" -b /proc/self/fd/1:/dev/stdout"
 command+=" -b /proc/self/fd/2:/dev/stderr"
+command+=" -b /dev/null:/proc/sys/kernel/cap_last_last"
 command+=" -b /:/host-rootfs"
 command+=" -b /sys"
 command+=" -b /sys/fs/selinux"
@@ -175,9 +176,17 @@ cat > $folder/home/$linux/.bash_profile <<- EOF
 apt update ; apt upgrade -y
 #ln -s /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
 apt install dialog nano sudo tzdata -y
-useradd -m -s /bin/bash $linux
-echo "$linux:$linux" | chpasswd
-echo "$linux  ALL=(ALL:ALL) ALL" > /etc/sudoers.d/$linux
+clear
+echo "Please, create your new username"
+echo "Input Username"
+read -p " " user
+echo "Input Password"
+read -p " " pass
+useradd -m -s $(which bash) ${user}
+usermod -aG sudo ${user}
+echo "${user}:${pass}" | chpasswd
+echo "${user}  ALL=(ALL:ALL) ALL" > /etc/sudoers.d/$linux
+echo " "
 rm -rf ~/.bash_profile
 exit
 EOF
@@ -186,7 +195,7 @@ bash $bin
 cat > $PREFIX/bin/$linux <<- EOF
 bash .$linux su $linux
 EOF
-     clear
+     #clear
      printf "\n"
      printf "${cyn}You can login to Linux with '${grn}$linux${cyn}' script next time.${rst}\n"
      printf "\n"
