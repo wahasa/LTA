@@ -125,7 +125,7 @@ command+=" -b /proc/self/fd/1:/dev/stdout"
 command+=" -b /proc/self/fd/2:/dev/stderr"
 command+=" -b /sys"
 command+=" -b $folder/tmp:/dev/shm"
-## Uncomment the following line to have access to the home directory of termux.
+## Uncomment the following line to get access to termux directory.
 #command+=" -b /data/data/com.termux/files/home:/root"
 ## Uncomment the following line to mount sdcard directly to linux.
 command+=" -b /sdcard"
