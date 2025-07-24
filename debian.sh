@@ -116,18 +116,26 @@ if [ -n "\$(ls -A $folder/binds)" ]; then
    done
 fi
 command+=" -b /dev"
+command+=" -b /dev/urandom:/dev/random"
 command+=" -b /proc"
-command+=" -b $folder/home/$linux:/dev/shm"
+command+=" -b /proc/sys/kernel/cap_last_cap"
+command+=" -b /proc/self/fd:/dev/fd"
+command+=" -b /proc/self/fd/0:/dev/stdin"
+command+=" -b /proc/self/fd/1:/dev/stdout"
+command+=" -b /proc/self/fd/2:/dev/stderr"
+command+=" -b /sys"
+command+=" -b $folder/tmp:/dev/shm"
 ## Uncomment the following line to have access to the home directory of termux.
-#command+=" -b /data/data/com.termux/files/home:/home/$linux"
-## Uncomment the following line to mount /sdcard directly.
+#command+=" -b /data/data/com.termux/files/home:/root"
+## Uncomment the following line to mount sdcard directly to linux.
 command+=" -b /sdcard"
 command+=" -w /home/$linux"
 command+=" /usr/bin/env -i"
-command+=" HOME=/home/$linux"
-command+=" PATH=/usr/local/sbin:/usr/local/bin:/bin:/usr/bin:/sbin:/usr/sbin"
-command+=" TERM=\$TERM"
+command+=" HOME=/root"
+command+=" PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+command+=" TERM=${TERM-xterm-256color}"
 command+=" LANG=C.UTF-8"
+command+=" TMPDIR=/tmp"
 command+=" /bin/bash --login"
 com=" \$@"
 if [ -z "\$1" ];then
