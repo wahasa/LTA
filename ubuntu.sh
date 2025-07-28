@@ -7,9 +7,9 @@
 # <=> https://ubuntu.com/about/release-cycle
 
 # Ubuntu ESM ( Extended Security Maintenance )
-# [+] trusty 14.04 lts ( Trusty Tahr )     - ( Release Apr 2014 - End Support Apr 2026 )
-# [+] xenial 16.04 lts ( Xenial Xerus )    - ( Release Apr 2016 - End Support Apr 2028 )
-# [+] bionic 18.04 lts ( Bionic Beaver )   - ( Release Apr 2018 - End Support Apr 2030 )
+# [+] trusty 14.04 lts ( Trusty Tahr )     - ( Release Apr 2014 / End Support Apr 2026 )
+# [+] xenial 16.04 lts ( Xenial Xerus )    - ( Release Apr 2016 / End Support Apr 2028 )
+# [+] bionic 18.04 lts ( Bionic Beaver )   - ( Release Apr 2018 / End Support Apr 2030 )
 
 # Ubuntu LTS ( Long Term Support )
 # [+] focal  20.04 lts ( Focal Fossa )     - ( Release Apr 2020 / End Support Apr 2032 )
@@ -67,12 +67,12 @@ read -p " " ubuntu
 clear
 bin=.ubuntu
 linux=ubuntu
-     printf "${rst}\n"
-     printf "${grn}Installing $linux $ubuntu,..\n"
-     printf "${rst}\n"
-     pkg install root-repo x11-repo
-     pkg install proot neofetch pulseaudio -y
-     #termux-setup-storage
+   printf "${rst}\n"
+   printf "${grn}Installing $linux $ubuntu,..\n"
+   printf "${rst}\n"
+   pkg install root-repo x11-repo
+   pkg install proot neofetch pulseaudio -y
+   #termux-setup-storage
 echo ""
 folder=ubuntu-fs
 neofetch --ascii_distro $linux -L
@@ -169,7 +169,7 @@ EOM
      printf "${ylw}Fixing permissions $linux.\n"
      #chmod -R 755 $folder
      printf "${ylw}Removing rootfs in termux.\n"
-     rm $tarball
+     #rm $tarball
      #clear
 
 sleep 2
@@ -190,11 +190,9 @@ echo ""
      printf "${red}Updating Package,..${rst}\n"
      printf "\n"
 
-cp $folder/etc/skel/.bashrc $folder/home/$linux/
 #echo "TZ='Asia/Jakarta'; export TZ" >> $folder/home/$linux/.profile
-echo "export PULSE_SERVER=127.0.0.1" >> $folder/home/$linux/.bashrc
+
 #sed -i 's/32/31/g' $folder/home/$linux/.bashrc
-echo "" > $folder/home/$linux/.hushlogin
 
 cat > $PREFIX/bin/$linux <<- EOF
 bash .$linux
@@ -217,6 +215,10 @@ bash $bin
 cat > $PREFIX/bin/$linux <<- EOF
 bash .$linux su $user
 EOF
+
+cp $folder/etc/skel/.bashrc $folder/root
+echo "export PULSE_SERVER=127.0.0.1" >> $folder/root/.bashrc
+echo "" > $folder/root/.hushlogin
    #clear
    printf "\n"
    printf "${cyn}You can login to Linux with '${grn}$linux${cyn}' script next time.${rst}\n"
