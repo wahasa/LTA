@@ -116,7 +116,7 @@ cat > $bin <<- EOM
 #!/data/data/com.termux/files/usr/bin/bash
 cd \$(dirname \$0)
 ## Audio output script in pulseaudio termux.
-pulseaudio --start --load="module-native-protocol-tcp auth-ip-acl=127.0.0.1 auth-anonymous=1" --exit-idle-time=-1
+pulseaudio --start --load="module-aaudio-sink" --load="module-native-protocol-tcp auth-ip-acl=127.0.0.1 auth-anonymous=1" --exit-idle-time=-1
 ## Unset LD_PRELOAD in case termux-exec is installed.
 unset LD_PRELOAD
 command="proot"
