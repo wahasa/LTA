@@ -130,17 +130,29 @@ if [ -n "\$(ls -A $folder/binds)" ]; then
    done
 fi
 command+=" -b /dev"
+command+=" -b /dev"
+command+=" -b /dev/urandom:/dev/random"
 command+=" -b /proc"
-command+=" -b $folder/home/$linux:/dev/shm"
-## Uncomment the following line to have access to the home directory of termux.
-#command+=" -b /data/data/com.termux/files/home:/home/$linux"
-## Uncomment the following line to mount /sdcard directly.
+command+=" -b /proc/self/fd:/dev/fd"
+command+=" -b /proc/self/fd/0:/dev/stdin"
+command+=" -b /proc/self/fd/1:/dev/stdout"
+command+=" -b /proc/self/fd/2:/dev/stderr"
+command+=" -b /dev/null:/proc/sys/kernel/cap_last_last"
+command+=" -b /:/host-rootfs"
+command+=" -b /sys"
+command+=" -b /sys/fs/selinux"
+command+=" -b $folder/tmp:/dev/shm"
+## Uncomment the following line to get access to termux directory.
+#command+=" -b /data/data/com.termux/files/home:/root"
+## Uncomment the following line to mount sdcard directly to linux.
 command+=" -b /sdcard"
 command+=" -w /home/$linux"
 command+=" /usr/bin/env -i"
-command+=" HOME=/home/$linux"
-command+=" PATH=/usr/local/sbin:/usr/local/bin:/bin:/usr/bin:/sbin:/usr/sbin"
-command+=" TERM=\$TERM"
+command+=" HOME=/root"
+command+=" MOZ_FAKE_NO_SANDBOX=1"
+command+=" PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+command+=" TERM=${TERM-xterm-256color}"
+command+=" TMPDIR=/tmp"
 command+=" LANG=C.UTF-8"
 command+=" /bin/bash --login"
 com=" \$@"
@@ -159,6 +171,21 @@ EOM
      printf "${ylw}Removing rootfs in termux.\n"
      rm $tarball
      #clear
+
+sleep 2
+echo ""
+echo "Please, create your new username"
+echo ""
+sleep 1
+echo "Input Username"
+read -p " " user
+sleep 2
+echo ""
+echo "Input Password"
+read -p " " pass
+sleep 1
+echo ""
+
      printf "\n"
      printf "${red}Updating Package,..${rst}\n"
      printf "\n"
@@ -177,23 +204,24 @@ chmod +x $PREFIX/bin/$linux
 cat > $folder/home/$linux/.bash_profile <<- EOF
 apt update ; apt upgrade -y
 ln -s /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
-apt install dialog nano sudo tzdata -y
-useradd -m -s /bin/bash $linux
-echo "$linux:$linux" | chpasswd
-echo "$linux  ALL=(ALL:ALL) ALL" > /etc/sudoers.d/$linux
+apt install dialog nano sudo wget tzdata -y
+useradd -m -s /bin/bash $user
+usermod -aG sudo $user
+echo "$user:$pass" | chpasswd
+echo "$user  ALL=(ALL:ALL) ALL" > /etc/sudoers.d/$user
 rm -rf ~/.bash_profile
 exit
 EOF
 
 bash $bin
 cat > $PREFIX/bin/$linux <<- EOF
-bash .$linux su $linux
+bash .$linux su $user
 EOF
-     clear
-     printf "\n"
-     printf "${cyn}You can login to Linux with '${grn}$linux${cyn}' script next time.${rst}\n"
-     printf "\n"
-     #rm ubuntu.sh
+   #clear
+   printf "\n"
+   printf "${cyn}You can login to Linux with '${grn}$linux${cyn}' script next time.${rst}\n"
+   printf "\n"
+   #rm ubuntu.sh
 #
 ## Script edited by 'WaHaSa', Script revision-6.
 #
