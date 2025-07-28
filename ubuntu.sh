@@ -1,26 +1,29 @@
 #!/data/data/com.termux/files/usr/bin/bash
 # <=> https://github.com/wahasa
 
-# Ubuntu Releases
+# Ubuntu Release
 # <=> https://ubuntu.com
+# <=> https://releases.ubuntu.com
 # <=> https://ubuntu.com/about/release-cycle
 
 # Ubuntu ESM ( Extended Security Maintenance )
-# [+] trusty 14.04 lts ( Trusty Tahr )     - ( Released Apr 2014 / End of Legacy Support Apr 2026 )
-# [+] xenial 16.04 lts ( Xenial Xerus )    - ( Released Apr 2016 / End of Legacy Support Apr 2028 )
-# [+] bionic 18.04 lts ( Bionic Beaver )   - ( Released Apr 2018 / End of Legacy Support Apr 2030 )
+# [+] trusty 14.04 lts ( Trusty Tahr )     - ( Release Apr 2014 - End Support Apr 2026 )
+# [+] xenial 16.04 lts ( Xenial Xerus )    - ( Release Apr 2016 - End Support Apr 2028 )
+# [+] bionic 18.04 lts ( Bionic Beaver )   - ( Release Apr 2018 - End Support Apr 2030 )
 
 # Ubuntu LTS ( Long Term Support )
-# [+] focal  20.04 lts ( Focal Fossa )     - ( Released Apr 2020 / End of Legacy Support Apr 2032 )
-# [+] jammy  22.04 lts ( Jammy Jellyfish ) - ( Released Apr 2022 / End of Legacy Support Apr 2034 )
-# [+] noble  24.04 lts ( Noble Numbat )    - ( Released Apr 2024 / End of Legacy Support Apr 2036 )
+# [+] focal  20.04 lts ( Focal Fossa )     - ( Release Apr 2020 / End Support Apr 2032 )
+# [+] jammy  22.04 lts ( Jammy Jellyfish ) - ( Release Apr 2022 / End Support Apr 2034 )
+# [+] noble  24.04 lts ( Noble Numbat )    - ( Release Apr 2024 / End Support Apr 2036 )
 
 # Ubuntu Lastest
-# [+] oracular   24.10 ( Oracular Oriole ) - ( Released Oct 2024 / End of Standard Support Jul 2025 )
-# [+] plucky     25.04 ( Plucky Puffin )   - ( Released Apr 2025 / End of Standard Support jan 2026 )
+# [+] oracular   24.10 ( Oracular Oriole ) - ( Release Oct 2024 / End Support Jul 2025 )
+# [+] plucky     25.04 ( Plucky Puffin )   - ( Release Apr 2025 / End Support jan 2026 )
 
 # Ubuntu Next
 # [+] questing   25.10 ( Questing Quokka ) - ( Next Release )
+
+# Ubuntu Devel
 # [+] devel            ( Development )
 
 # Ubuntu Repositories
@@ -47,6 +50,7 @@ clear
 printf "${blu} • Welcome To Ubuntu Termux For Android\n"
 printf "\n"
 printf "${blu}List Code Name     Version     Recommended\n"
+#printf "${red}[+]  ${red}devel         ${red}16.04          ${red}no\n"
 printf "${grn}[+]  ${ylw}questing       ${wht}25.10          ${grn}yes\n"
 printf "${grn}[+]  ${ylw}plucky         ${wht}25.04          ${grn}yes\n"
 printf "${grn}[+]  ${ylw}oracular       ${wht}24.10          ${grn}yes\n"
