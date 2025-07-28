@@ -24,7 +24,7 @@
 # [+] questing   25.10 ( Questing Quokka ) - ( Next Release )
 
 # Ubuntu Devel
-# [+] devel            ( Development )
+# [+] devel      Next  ( Development )
 
 # Ubuntu Repositories
 # <=> http://ports.ubuntu.com/ubuntu-ports/dists
@@ -50,7 +50,7 @@ clear
 printf "${blu} • Welcome To Ubuntu Termux For Android\n"
 printf "\n"
 printf "${blu}List Code Name     Version     Recommended\n"
-#printf "${red}[+]  ${red}devel         ${red}16.04          ${red}no\n"
+#printf"${red}[+]  ${red}devel          ${red}16.04          ${red}no \n"
 printf "${grn}[+]  ${ylw}questing       ${wht}25.10          ${grn}yes\n"
 printf "${grn}[+]  ${ylw}plucky         ${wht}25.04          ${grn}yes\n"
 printf "${grn}[+]  ${ylw}oracular       ${wht}24.10          ${grn}yes\n"
@@ -58,8 +58,8 @@ printf "${grn}[+]  ${ylw}noble          ${wht}24.04          ${grn}yes\n"
 printf "${grn}[+]  ${ylw}jammy          ${wht}22.04          ${grn}yes\n"
 printf "${grn}[+]  ${ylw}focal          ${wht}20.04          ${grn}yes\n"
 printf "${grn}[+]  ${ylw}bionic         ${wht}18.04          ${grn}yes\n"
-printf "${red}[+]  ${red}xenial         ${red}16.04          ${red}no\n"
-printf "${red}[+]  ${red}trusty         ${red}14.04          ${red}no\n"
+#printf"${red}[+]  ${red}xenial         ${red}16.04          ${red}no \n"
+#printf"${red}[+]  ${red}trusty         ${red}14.04          ${red}no \n"
 printf "${blu}\n"
 printf "${cyn}Select your ubuntu < ${ylw}code name${cyn} > :${ylw}"
 read -p " " ubuntu
@@ -73,45 +73,46 @@ linux=ubuntu
    pkg install root-repo x11-repo
    pkg install proot neofetch pulseaudio -y
    #termux-setup-storage
-echo ""
+   printf "${rst}\n"
 folder=ubuntu-fs
 neofetch --ascii_distro $linux -L
 if [ -d "$folder" ]; then
-         first=1
-         printf "${red}Skipping Downloading.${rst}\n"
+        first=1
+        printf "${red}Ubuntu has been installed on $folder.${rst}\n"
+        printf "\n" ; exit
 fi
 tarball="ubuntu-rootfs.tar.gz"
 if [ "$first" != 1 ];then
-         if [ ! -f $tarball ]; then
-         printf "${grn}Downloading rootfs, please wait,..${rst}\n"
-         echo ""
+        if [ ! -f $tarball ]; then
+        printf "${grn}Downloading rootfs, please wait,..${rst}\n"
+        printf "\n"
                case `dpkg --print-architecture` in
                aarch64)
                        archurl="arm64" ;;
                arm*)
                        archurl="armhf" ;;
-	       #i386)
-	       #       archurl="i386" ;;
+               #i386)
+               #       archurl="i386" ;;
                #x86_64)
                #       archurl="amd64" ;;
                *)
-                       echo "Unknown Architecture."; exit 1 ;;
+               printf "${red}Unknown architecture.\n"
+               printf "\n" ; exit 1 ;;
                esac
-	       wget "https://partner-images.canonical.com/oci/${ubuntu}/current/ubuntu-${ubuntu}-oci-${archurl}-root.tar.gz" -O $tarball
-	 fi
-         mkdir -p $folder
-	 mkdir -p $folder/binds
-         printf "${cyn}Extracting rootf, please wait,..${rst}\n"
-         proot --link2symlink tar -xpf ~/${tarball} -C ~/$folder/ --exclude='dev' ||:
-    fi
-    echo "localhost" > $folder/etc/hostname
-    echo "127.0.0.1 localhost" > $folder/etc/hosts
-    echo "nameserver 8.8.8.8" > $folder/etc/resolv.conf
-    mkdir -p $folder/home/$linux
-    printf "\n"
-    printf "${ppl}Writing launch script.${rst}\n"
-    printf "\n"
-
+               wget "https://partner-images.canonical.com/oci/${ubuntu}/current/ubuntu-${ubuntu}-oci-${archurl}-root.tar.gz" -O $tarball
+        fi
+        mkdir -p $folder
+        mkdir -p $folder/binds
+        printf "${cyn}Extracting rootf, please wait,..${rst}\n"
+        proot --link2symlink tar -xpf ~/${tarball} -C ~/$folder/ --exclude='dev' ||:
+   fi
+   echo "localhost" > $folder/etc/hostname
+   echo "127.0.0.1 localhost" > $folder/etc/hosts
+   echo "nameserver 8.8.8.8" > $folder/etc/resolv.conf
+   mkdir -p $folder/home/$linux
+   printf "\n"
+   sleep 2
+   printf "${ylw}Writing script to login.....[${grn}ok${ylw}]${rst}\n"
 cat > $bin <<- EOM
 #!/data/data/com.termux/files/usr/bin/bash
 cd \$(dirname \$0)
@@ -143,10 +144,10 @@ command+=" -b /sys"
 command+=" -b /sys/fs/selinux"
 command+=" -b $folder/tmp:/dev/shm"
 ## Uncomment the following line to get access to termux directory.
-#command+=" -b /data/data/com.termux/files/home:/root"
+command+=" -b /data/data/com.termux/files/home:/home/ubuntu"
 ## Uncomment the following line to mount sdcard directly to linux.
 command+=" -b /sdcard"
-command+=" -w /home/$linux"
+command+=" -w /root"
 command+=" /usr/bin/env -i"
 command+=" HOME=/root"
 command+=" MOZ_FAKE_NO_SANDBOX=1"
@@ -162,47 +163,43 @@ else
    \$command -c "\$com"
 fi
 EOM
-     printf "${ylw}Fixing shebang of $linux.\n"
-     termux-fix-shebang $bin
-     printf "${ylw}Making executable $linux.\n"
-     chmod +x $bin
-     printf "${ylw}Fixing permissions $linux.\n"
-     #chmod -R 755 $folder
-     printf "${ylw}Removing rootfs in termux.\n"
-     #rm $tarball
-     #clear
-
+   sleep 1
+   printf "${ylw}Fixing shebang of $linux....[${grn}ok${ylw}]\n"
+   termux-fix-shebang $bin
+   sleep 1
+   printf "${ylw}Making executable $linux....[${grn}ok${ylw}]\n"
+   chmod +x $bin
+   sleep 1
+   printf "${ylw}Fixing permissions $linux...[${grn}ok${ylw}]\n"
+   #chmod -R 755 $folder
+   sleep 1
+   printf "${ylw}Removing rootfs in termux...[${grn}ok${ylw}]\n"
+   rm $tarball
+   printf "\n"
 sleep 2
-echo ""
-echo "Please, create your new username"
-echo ""
+printf "\n"
+printf "${cyn}Please, create your new username${rst}\n"
 sleep 1
-echo "Input Username"
+printf "${grn}Input username${rst}\n"
 read -p " " user
 sleep 2
-echo ""
-echo "Input Password"
+printf "\n"
+printf "${grn}Input password${rst}\n"
 read -p " " pass
 sleep 1
-echo ""
-
-     printf "\n"
-     printf "${red}Updating Package,..${rst}\n"
-     printf "\n"
-
-#echo "TZ='Asia/Jakarta'; export TZ" >> $folder/home/$linux/.profile
-
-#sed -i 's/32/31/g' $folder/home/$linux/.bashrc
-
+   printf "\n"
+   printf "\n"
+   printf "${red}Updating package,..${rst}\n"
+   printf "\n"
+echo "" > $folder/root/.hushlogin
 cat > $PREFIX/bin/$linux <<- EOF
 bash .$linux
 EOF
-
 chmod +x $PREFIX/bin/$linux
-cat > $folder/home/$linux/.bash_profile <<- EOF
+cat > $folder/root/.bash_profile <<- EOF
 apt update ; apt upgrade -y
 ln -s /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
-apt install dialog nano sudo wget tzdata -y
+apt install dialog nano sudo fastfetch tzdata -y
 useradd -m -s /bin/bash $user
 usermod -aG sudo $user
 echo "$user:$pass" | chpasswd
@@ -210,15 +207,15 @@ echo "$user  ALL=(ALL:ALL) ALL" > /etc/sudoers.d/$user
 rm -rf ~/.bash_profile
 exit
 EOF
-
 bash $bin
 cat > $PREFIX/bin/$linux <<- EOF
 bash .$linux su $user
 EOF
-
-cp $folder/etc/skel/.bashrc $folder/root
-echo "export PULSE_SERVER=127.0.0.1" >> $folder/root/.bashrc
-echo "" > $folder/root/.hushlogin
+cp $folder/etc/skel/.bashrc $folder/home/$user
+#echo "TZ='Asia/Jakarta'; export TZ" >> $folder/home/$user/.profile
+echo "export PULSE_SERVER=127.0.0.1 ; cd" >> $folder/home/$user/.bashrc
+#sed -i 's/32/31/g' $folder/home/$user/.bashrc
+echo "" > $folder/home/$user/.hushlogin
    #clear
    printf "\n"
    printf "${cyn}You can login to Linux with '${grn}$linux${cyn}' script next time.${rst}\n"
