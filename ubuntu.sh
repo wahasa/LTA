@@ -216,7 +216,7 @@ cp $folder/etc/skel/.bashrc $folder/home/$user
 echo "export PULSE_SERVER=127.0.0.1 ; cd" >> $folder/home/$user/.bashrc
 #sed -i 's/32/31/g' $folder/home/$user/.bashrc
 echo "" > $folder/home/$user/.hushlogin
-   #clear
+   clear
    printf "\n"
    printf "${cyn}You can login to Linux with '${grn}$linux${cyn}' script next time.${rst}\n"
    printf "\n"
