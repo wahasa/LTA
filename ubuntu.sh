@@ -199,7 +199,7 @@ chmod +x $PREFIX/bin/$linux
 cat > $folder/root/.bash_profile <<- EOF
 apt update ; apt upgrade -y
 ln -s /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
-apt install apt-utils dialog nano sudo fastfetch tzdata -y
+apt install apt-utils dialog nano sudo tzdata -y
 useradd -m -s /bin/bash $user
 usermod -aG sudo $user
 echo "$user:$pass" | chpasswd
