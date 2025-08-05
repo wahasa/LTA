@@ -191,6 +191,7 @@ read -p " " pass
    printf "${red}Updating package,..${rst}\n"
    printf "\n"
 echo "" > $folder/root/.hushlogin
+echo "TZ='Asia/Jakarta'; export TZ" >> $folder/root/.profile
 cat > $PREFIX/bin/$linux <<- EOF
 bash .$linux
 EOF
@@ -211,7 +212,7 @@ cat > $PREFIX/bin/$linux <<- EOF
 bash .$linux su $user
 EOF
 cp $folder/etc/skel/.bashrc $folder/home/$user
-#echo "TZ='Asia/Jakarta'; export TZ" >> $folder/home/$user/.profile
+echo "TZ='Asia/Jakarta'; export TZ" >> $folder/home/$user/.profile
 echo "export PULSE_SERVER=127.0.0.1 ; cd" >> $folder/home/$user/.bashrc
 #sed -i 's/32/31/g' $folder/home/$user/.bashrc
 echo "" > $folder/home/$user/.hushlogin
