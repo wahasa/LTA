@@ -110,9 +110,9 @@ if [ "$first" != 1 ];then
    echo "127.0.0.1 localhost" > $folder/etc/hosts
    echo "nameserver 8.8.8.8" > $folder/etc/resolv.conf
    mkdir -p $folder/home/$linux
-   printf "\n"
-   sleep 2
-   printf "${ylw}Writing script to login.....[${grn}ok${ylw}]${rst}\n"
+sleep 2
+printf "\n"
+printf "${ylw}Writing script to login.....[${grn}ok${ylw}]${rst}\n"
 cat > $bin <<- EOM
 #!/data/data/com.termux/files/usr/bin/bash
 cd \$(dirname \$0)
@@ -131,20 +131,19 @@ if [ -n "\$(ls -A $folder/binds)" ]; then
    done
 fi
 command+=" -b /dev"
-command+=" -b /dev"
 command+=" -b /dev/urandom:/dev/random"
 command+=" -b /proc"
 command+=" -b /proc/self/fd:/dev/fd"
 command+=" -b /proc/self/fd/0:/dev/stdin"
 command+=" -b /proc/self/fd/1:/dev/stdout"
 command+=" -b /proc/self/fd/2:/dev/stderr"
-command+=" -b /dev/null:/proc/sys/kernel/cap_last_last"
+command+=" -b /dev/null:/proc/sys/kernel/cap_last_cap"
 command+=" -b /:/host-rootfs"
 command+=" -b /sys"
 command+=" -b /sys/fs/selinux"
 command+=" -b $folder/tmp:/dev/shm"
 ## Uncomment the following line to get access to termux directory.
-command+=" -b /data/data/com.termux/files/home:/home/ubuntu"
+command+=" -b /data/data/com.termux/files/home:/home/$linux"
 ## Uncomment the following line to mount sdcard directly to linux.
 command+=" -b /sdcard"
 command+=" -w /root"
@@ -175,8 +174,8 @@ EOM
    sleep 1
    printf "${ylw}Removing rootfs in termux...[${grn}ok${ylw}]\n"
    rm $tarball
-   printf "\n"
 sleep 2
+printf "\n"
 printf "\n"
 printf "${cyn}Please, create your new username${rst}\n"
 sleep 1
@@ -186,7 +185,7 @@ sleep 2
 printf "\n"
 printf "${grn}Input password${rst}\n"
 read -p " " pass
-sleep 1
+   sleep 1
    printf "\n"
    printf "\n"
    printf "${red}Updating package,..${rst}\n"
