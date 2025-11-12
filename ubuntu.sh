@@ -21,7 +21,7 @@
 # [+] resolute   26.04 (Resolute Raccoon)
 
 # Ubuntu Next
-# [+] questing   25.10 ( Questing Quokka ) - ( Next Release )
+# [+] questing   25.10 ( Questing Quokka )
 
 # Ubuntu Devel
 # [+] devel      Next  ( Development )
