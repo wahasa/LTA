@@ -7,18 +7,18 @@
 # <=> https://ubuntu.com/about/release-cycle
 
 # Ubuntu ESM ( Extended Security Maintenance )
-# [+] trusty 14.04 lts ( Trusty Tahr )     - ( Release Apr 2014 / End Support Apr 2026 )
-# [+] xenial 16.04 lts ( Xenial Xerus )    - ( Release Apr 2016 / End Support Apr 2028 )
-# [+] bionic 18.04 lts ( Bionic Beaver )   - ( Release Apr 2018 / End Support Apr 2030 )
+# [+] trusty 14.04 lts ( Trusty Tahr )
+# [+] xenial 16.04 lts ( Xenial Xerus )
+# [+] bionic 18.04 lts ( Bionic Beaver )
+# [+] focal  20.04 lts ( Focal Fossa )
 
 # Ubuntu LTS ( Long Term Support )
-# [+] focal  20.04 lts ( Focal Fossa )     - ( Release Apr 2020 / End Support Apr 2032 )
-# [+] jammy  22.04 lts ( Jammy Jellyfish ) - ( Release Apr 2022 / End Support Apr 2034 )
-# [+] noble  24.04 lts ( Noble Numbat )    - ( Release Apr 2024 / End Support Apr 2036 )
+# [+] jammy  22.04 lts ( Jammy Jellyfish )
+# [+] noble  24.04 lts ( Noble Numbat )
 
 # Ubuntu Lastest
-# [+] oracular   24.10 ( Oracular Oriole ) - ( Release Oct 2024 / End Support Jul 2025 )
-# [+] plucky     25.04 ( Plucky Puffin )   - ( Release Apr 2025 / End Support jan 2026 )
+# [+] plucky     25.04 ( Plucky Puffin )
+# [+] resolute   26.04 (Resolute Raccoon)
 
 # Ubuntu Next
 # [+] questing   25.10 ( Questing Quokka ) - ( Next Release )
