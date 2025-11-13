@@ -18,10 +18,10 @@
 
 # Ubuntu Lastest
 # [+] plucky     25.04 ( Plucky Puffin )
-# [+] resolute   26.04 (Resolute Raccoon)
+# [+] questing   25.10 ( Questing Quokka )
 
 # Ubuntu Next
-# [+] questing   25.10 ( Questing Quokka )
+# [+] resolute   26.04 (Resolute Raccoon)
 
 # Ubuntu Devel
 # [+] devel      Next  ( Development )
@@ -50,10 +50,10 @@ clear
 printf "${blu} • Welcome To Ubuntu Termux For Android\n"
 printf "\n"
 printf "${blu}List Code Name     Version     Recommended\n"
-#printf"${red}[+]  ${red}devel          ${red}16.04          ${red}no \n"
+#printf"${red}[+]  ${red}devel          ${red}devel          ${red}no \n"
+#printf"${red}[+]  ${red}resolute       ${red}26.04          ${red}no \n"
 printf "${grn}[+]  ${ylw}questing       ${wht}25.10          ${grn}yes\n"
 printf "${grn}[+]  ${ylw}plucky         ${wht}25.04          ${grn}yes\n"
-printf "${grn}[+]  ${ylw}oracular       ${wht}24.10          ${grn}yes\n"
 printf "${grn}[+]  ${ylw}noble          ${wht}24.04          ${grn}yes\n"
 printf "${grn}[+]  ${ylw}jammy          ${wht}22.04          ${grn}yes\n"
 printf "${grn}[+]  ${ylw}focal          ${wht}20.04          ${grn}yes\n"
