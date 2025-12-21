@@ -28,6 +28,7 @@
 # <=> http://ftp.debian.org/debian/dists
 
 # Debian Rootfs
+# <=> http://cloud.debian.org/images/cloud
 # <=> https://github.com/debuerreotype/docker-debian-artifacts
 # <=> https://docker.debian.net
 # <=> https://hub.docker.com/_/debian
