@@ -4,19 +4,24 @@
 # Debian Releases
 # <=> https://debian.org
 # <=> https://wiki.debian.org/DebianReleases
+# <=> https://wiki.debian.org/LTS/Extended
+# <=> https://wiki.debian.org/LTS
 
 # Debian ELTS ( Extended Long Term Support )
-# [+] stretch  09 ( Stretch )  - ( Release Date Jun 2017 / End of Support Jun 2027 )
-# [+] buster   10 ( Buster )   - ( Release Date Jul 2019 / End of Support Jun 2029 )
+# [+] stretch  09 ( Stretch )
+# [+] buster   10 ( Buster )
 
 # Debian LTS ( Long term support )
-# [+] bullseye 11 ( Bullseye ) - ( Release Date Aug 2021 / End of Support Jun 2031 )
+# [+] bullseye 11 ( Bullseye )
 
 # Debian Lastest
-# [+] bookworm 12 ( Bookworm ) - ( Release Date Jun 2023 / End of Support Jun 2033 )
+# [+] bookworm 12 ( Bookworm )
+# [+] trixie   13 ( Trixie )
 
 # Debian Next
-# [+] trixie   13 ( Trixie )   - ( Next Release )
+# [+] forky    14 ( Forky )
+
+# Ubuntu Devel
 # [+] testing     ( Development )
 
 # Debian Repositories
